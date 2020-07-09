@@ -25,7 +25,7 @@ public class Produto implements Serializable{
 	private Integer id;
 	private String nome;
 	private Double preco;
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA"	//nome da tabela que relaciona em "Muitos para muitos"
 	,joinColumns = @JoinColumn(name= "produto_id")
