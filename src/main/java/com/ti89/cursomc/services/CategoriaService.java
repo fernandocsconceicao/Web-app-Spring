@@ -1,14 +1,14 @@
 package com.ti89.cursomc.services;
 
-import java.net.URI;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.ti89.cursomc.domain.Categoria;
 import com.ti89.cursomc.repositories.CategoriaRepository;
+import com.ti89.cursomc.services.exceptions.DataIntegrityException;
 import com.ti89.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -41,7 +41,22 @@ public class CategoriaService {
 			return repo.save(obj);			//save ser tanto para salvar quanto atualizar*
 		}
 		
+		public void delete(Integer id) {
+			find(id);
+			try {
+				repo.deleteById(id);		}
+			catch(DataIntegrityViolationException e) {
+				throw new DataIntegrityException("Nao é possivel excluir uma catagoria "
+						+ "que possui produtos") ;	}
+				
+				
+				
+			
+			
+			
+		}
 		
+		 
 		
 
 }
